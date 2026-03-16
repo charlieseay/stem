@@ -1,0 +1,91 @@
+name: Bug Report
+description: Something isn't working as expected
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug. Please fill in the details below so we can reproduce and fix it.
+
+  - type: input
+    id: stem-version
+    attributes:
+      label: Stem version
+      description: "Run `stem --version` and paste the output"
+      placeholder: "Stem v1.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: macos-version
+    attributes:
+      label: macOS version
+      description: "Apple menu > About This Mac"
+      placeholder: "macOS 15.3 (Sequoia)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: ai-tool
+    attributes:
+      label: AI tool
+      description: Which MCP client are you using?
+      options:
+        - Claude Code
+        - Cursor
+        - Windsurf
+        - Other (describe below)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: install-method
+    attributes:
+      label: Install method
+      options:
+        - Homebrew
+        - .pkg installer
+        - Built from source
+        - Direct binary download
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the bug. What did you expect vs what actually happened?
+      placeholder: "I asked Claude to play a song and got an error..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: How can we reproduce this?
+      placeholder: |
+        1. Connect Stem to Claude Code
+        2. Ask "Play Everlong by Foo Fighters"
+        3. Error appears: "..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error output or logs
+      description: Paste any error messages, terminal output, or crash logs. Check Console.app for entries mentioning `com.seayniclabs.stem`.
+      render: shell
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Pre-flight
+      options:
+        - label: I ran `stem setup` and Apple Music access is granted
+          required: false
+        - label: I checked the [troubleshooting guide](https://github.com/seayniclabs/stem/blob/main/docs/troubleshooting.md)
+          required: false

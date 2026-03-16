@@ -1,0 +1,48 @@
+name: Feature Request
+description: Suggest a new tool, improvement, or integration
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Have an idea for Stem? We'd like to hear it. Please describe what you're looking for and why.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What would you like?
+      description: Describe the feature or improvement.
+      placeholder: "It would be great if Stem could..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use case
+      description: How would you use this? What problem does it solve?
+      placeholder: "When I'm working in Claude Code, I often want to..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - New tool (add a new MCP tool)
+        - Existing tool improvement
+        - New AI tool integration
+        - Documentation
+        - Installation / distribution
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Have you tried any workarounds or alternatives?
+    validations:
+      required: false

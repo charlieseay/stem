@@ -34,13 +34,13 @@ jobs:
           security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
           security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
-          echo "$DEVELOPER_ID_APPLICATION_CERT_P12" | base64 --decode > /tmp/application.p12
-          security import /tmp/application.p12 -k "$KEYCHAIN_PATH" -P "$CERT_PASSWORD" -T /usr/bin/codesign
-          echo "$DEVELOPER_ID_INSTALLER_CERT_P12" | base64 --decode > /tmp/installer.p12
-          security import /tmp/installer.p12 -k "$KEYCHAIN_PATH" -P "$CERT_PASSWORD" -T /usr/bin/productbuild
+          echo "$DEVELOPER_ID_APPLICATION_CERT_P12" | base64 --decode > /tmp/certs.p12
+          security import /tmp/certs.p12 -k "$KEYCHAIN_PATH" -P "$CERT_PASSWORD" -T /usr/bin/codesign -T /usr/bin/productbuild -T /usr/bin/pkgbuild
           security list-keychains -d user -s "$KEYCHAIN_PATH" login.keychain
           security set-key-partition-list -S apple-tool:,apple: -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
-          rm /tmp/application.p12 /tmp/installer.p12
+          # List imported identities for debugging
+          security find-identity -v "$KEYCHAIN_PATH"
+          rm /tmp/certs.p12
 
       - name: Construct app wrapper
         run: |
